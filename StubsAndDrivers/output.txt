@@ -1,0 +1,73 @@
+// Driver Class
+import java.util.*;
+
+public class Driver{
+
+	
+
+	public static void main(String args[]){
+		String email, password;
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Enter Email: ");
+		email = sc.nextLine();
+		System.out.println("Enter Password: ");
+		password = sc.nextLine();
+
+		Validate validator = new Validate(email, password);
+		validator.validateForm();	
+	}
+	
+
+}
+
+
+// Validate Class
+class Validate{
+	String email, password;
+	public Validate(String email, String password){
+		this.email = email;
+		this.password = password;
+	}
+
+	public void validateForm(){
+		if(validateEmail(email) && validatePassword()){
+			System.out.println("Validated");
+		}else{
+			System.out.println("Validation Failed please check your email and password");
+		}
+	}
+
+	public boolean validateEmail(String email){
+		String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+		java.util.regex.Matcher m = p.matcher(email);
+		return m.matches();
+	}
+
+	//This is a stub
+	public boolean validatePassword(){
+		return true;
+	}
+}
+
+
+//Output
+
+Wrong Credentials =>
+
+Enter Email:
+john@gmail
+Enter Password:
+1234
+Validation Failed please check your email and password
+
+
+
+Correct Credentials =>
+
+Enter Email:
+john@doe.com
+Enter Password:
+1234
+Validated
